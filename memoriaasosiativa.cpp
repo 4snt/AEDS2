@@ -3,10 +3,10 @@
 using namespace std;
 
 // Definindo uma matriz de memória para a IA e variáveis de controle
-int iaMemory[4][4], i, j;
+int memoria_IA[4][4], i, j;
 
 // Função para ensinar a matriz à IA
-int teachMatrix() {
+int ensinar_matriz() {
     // Obtendo o vetor
     int vetor[4];
     for (i = 0; i < 4; i++) {
@@ -17,7 +17,7 @@ int teachMatrix() {
     // Aprendendo a matriz com o vetor
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            iaMemory[i][j] += vetor[i] * vetor[j];
+            memoria_IA[i][j] += vetor[i] * vetor[j];
         }
     }
 
@@ -25,7 +25,7 @@ int teachMatrix() {
     for (i = 0; i < 4; i++) {
         cout << "|";
         for (j = 0; j < 4; j++) {
-            cout << iaMemory[i][j] << "|";
+            cout << memoria_IA[i][j] << "|";
         }
         cout << '\n';
     }
@@ -34,13 +34,13 @@ int teachMatrix() {
 }
 
 // Função para verificar se a IA reconhece um vetor
-int check() {
-    int vetor[4], matrixVetor[4], numerator, aux1, aux2;
-    double iaResponse;
+int checar_matriz() {
+    int vetor[4], matriz_vetor[4], numerador, auxiliar1, auxiliar2;
+    double resposta_IA;
 
-    numerator = 0;
-    aux1 = 0;
-    aux2 = 0;
+    numerador = 0;
+    auxiliar1 = 0;
+    auxiliar2 = 0;
 
     // Obtendo o vetor para verificação
     for (i = 0; i < 4; i++) {
@@ -50,23 +50,23 @@ int check() {
 
     // Obtendo a resposta da IA
     for (i = 0; i < 4; i++) {
-        matrixVetor[i] = iaMemory[i][0] * vetor[i];
+        matriz_vetor[i] = memoria_IA[i][0] * vetor[i];
         for (j = 1; j < 4; j++) {
-            matrixVetor[i] += iaMemory[i][j];
+            matriz_vetor[i] += memoria_IA[i][j];
         }
     }
     
     // Obtendo a qualidade da resposta
     for (i = 0; i < 4; i++) {
-        numerator += matrixVetor[i] * vetor[i];
+        numerador += matriz_vetor[i] * vetor[i];
 
-        aux1 += matrixVetor[i] * matrixVetor[i];
-        aux2 += vetor[i] * vetor[i];
+        auxiliar1 += matriz_vetor[i] * matriz_vetor[i];
+        auxiliar2 += vetor[i] * vetor[i];
     }
 
     // Calculando a resposta da IA com base na similaridade de cosseno
-    iaResponse = cos((numerator / (sqrt(aux1) * sqrt(aux2))));
-    cout << "Resposta da IA é: " << iaResponse << "\n";
+    resposta_IA = cos((numerador / (sqrt(auxiliar1) * sqrt(auxiliar2))));
+    cout << "Resposta da IA é: " << resposta_IA << "\n";
 
     return 0;
 }
@@ -76,7 +76,7 @@ int main() {
     // Construindo a matriz
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            iaMemory[i][j] = 0;
+            memoria_IA[i][j] = 0;
         }
     }
 
@@ -84,26 +84,26 @@ int main() {
     for (i = 0; i < 4; i++) {
         cout << "|";
         for (j = 0; j < 4; j++) {
-            cout << iaMemory[i][j] << "|";
+            cout << memoria_IA[i][j] << "|";
         }
         cout << '\n';
     }
 
     int menu = 1;
     while (menu == 1) {
-        int choice;
+        int escolha;
         cout << "Pressione 1 para ensinar a IA. \n";
         cout << "Pressione 2 para checar se a IA reconhece. \n";
         cout << "Pressione 3 para sair. \n";
-        cin >> choice;
+        cin >> escolha;
 
-        switch (choice) {
+        switch (escolha) {
             case 1: {
-                teachMatrix();
+                ensinar_matriz();
                 break;
             };
             case 2: {
-                check();
+                checar_matriz();
                 break;
             };
             case 3: {
@@ -115,3 +115,4 @@ int main() {
 
     return 0;
 }
+
