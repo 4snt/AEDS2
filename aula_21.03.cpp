@@ -3,7 +3,9 @@
 using namespace std;
 
 int funcaofatorial(int numFatorial, int result = 1){
-    return (numFatorial <= 1) ? result : funcaofatorial(numFatorial - 1, result * numFatorial);
+    if (numFatorial == 1)
+        return result;
+    return funcaofatorial(numFatorial - 1, result * numFatorial);
 }
 
 
