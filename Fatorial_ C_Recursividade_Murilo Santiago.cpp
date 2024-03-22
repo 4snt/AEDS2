@@ -7,8 +7,6 @@ int funcaofatorial(int numFatorial, int result = 1){
         return result;
     return funcaofatorial(numFatorial - 1, result * numFatorial);
 }
-
-
 int main(){
     int numFatorial;
     cout << "Digite o numero a ser feito o fatorial:\n";
